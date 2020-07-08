@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+{{> head }}
+
+<body class="cBallerina-io">
+    {{> bioBody }}
+    <div class="row cBallerina-io-Gray-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 cBallerina-io-Home-Middle-col">
+
+                    <nav class="cLeftNavContainer">
+                        <ul class="cMainLeftNav">
+                            <li class="sub-menu cTopicURL OpenUL">
+                                <div class="cLeftMenuLink cTopiAtag">Errors</div>
+                                <ul class="sub-ul Open-submenu" style="display: none;">
+                                    {{#each module.errors}}
+                                    <li {{#equals error.name name}}class="active" {{/equals}}>
+                                        <a href="#{{name}}">{{name}}</a>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </li>
+                            {{> currentModule }}
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 cBallerina-io-Home-Middle-col">
+                    <div id="search-impl" class="search-bar"></div>
+
+                    <div id="main" class="cBlallerina-io-docs-content-container">
+                        <div class="wy-nav-content">
+                            <div class="rst-content">
+                                <div role="main">
+                                    {{> breadcrumbhead }}
+                                    <li>/</li>
+                                    <li><a href="{{ rootPath }}{{module.id}}/index.html">{{module.id}}</a></li>
+                                    <li>/</li>Errors
+                                    {{> breadcrumbfoot }}
+
+                                    <div class="section">
+                                        <h1>
+                                            <span class="title-type">Errors - </span>
+                                            {{#if project.isSingleFile}}
+                                            {{project.sourceFileName}}
+                                            {{else}}
+                                            <a href="{{ rootPath }}{{module.id}}/index.html">{{module.id}}</a>
+                                            {{/if}}
+                                        </h1>
+                                        <div class="errors">
+                                            <div class="data-wrapper">
+                                                {{#each errors}}
+                                                <div class="params-listing">
+                                                    <ul>
+                                                        <li>
+                                                            <b {{#if isDeprecated}}class="strike" {{/if}}>{{ name }}
+                                                            </b>
+                                                            <span
+                                                                class="type">{{#if detailType }}{{{ typeName detailType }}}{{/if}}</span>
+                                                            {{ attachmentPoints }}
+                                                        </li>
+                                                        <li>
+                                                            {{#if isDeprecated}}
+                                                            <span class="stab">Deprecated</span>
+                                                            {{/if}}
+                                                            {{{ description }}}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> foot }}
+</body>
+
+{{> footer }}

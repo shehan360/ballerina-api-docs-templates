@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+{{> head }}
+
+<body class="cBallerina-io">
+    {{> bioBody }}
+    <div class="row cBallerina-io-Gray-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 cBallerina-io-Home-Middle-col">
+
+                    <nav class="cLeftNavContainer">
+                        <ul class="cMainLeftNav">
+                            <li class="sub-menu cTopicURL OpenUL">
+                                <div class="cLeftMenuLink cTopiAtag">Clients</div>
+                                <ul class="sub-ul Open-submenu" style="display: none;">
+                                    {{#each module.clients}}
+                                    <li {{#equals client.name name}}class="active" {{/equals}}>
+                                        <a href="{{name}}.html">{{name}}</a>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </li>
+                            {{> currentModule }}
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 cBallerina-io-Home-Middle-col">
+                    <div id="search-impl" class="search-bar"></div>
+
+                    <div id="main" class="cBlallerina-io-docs-content-container">
+                        <div class="wy-nav-content">
+                            <div class="rst-content">
+                                <div role="main">
+                                    {{> breadcrumbhead }}
+                                    <li>/</li>
+                                    <li><a href="{{ rootPath }}{{module.id}}/index.html">{{module.id}}</a></li>
+                                    <li>/</li>
+                                    <li><a href="{{ rootPath }}{{module.id}}/index.html#clients">Clients</a></li>
+                                    <li>/</li>{{ client.name }}
+                                    {{> breadcrumbfoot }}
+
+                                    <div class="section">
+                                        <h1>
+                                            <span class="title-type">Clients - </span>
+                                            {{#if project.isSingleFile}}
+                                            {{project.sourceFileName}}
+                                            {{else}}
+                                            <a href="{{ rootPath }}{{module.id}}/index.html">{{module.id}}</a> :
+                                            {{/if}}
+                                            <span class="clients">{{ client.name }}</span>
+                                        </h1>
+                                        <p>{{{ client.description }}}</p>
+
+                                        <div class="constants">
+                                            <div class="method-sum">
+                                                {{#if client.initMethod}}
+                                                {{#client.initMethod}}
+                                                {{> initMethod }}
+                                                {{/client.initMethod}}
+                                                {{/if}}
+
+                                                {{#if client.remoteMethods }}
+                                                <h2>Remote Methods</h2>
+                                                <table>
+                                                    {{#each client.remoteMethods}}
+                                                    <tr>
+                                                        <td class="module-title truncate functions" title="{{name}}"><a
+                                                                class="functions" href="#{{name}}">{{name}}</a></td>
+                                                        <td class="module-desc">{{{ editDescription description }}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </table>
+                                                {{/if}}
+
+                                                {{#if client.otherMethods}}
+                                                <h2>Methods</h2>
+                                                <div class="method-list">
+                                                    {{#each client.otherMethods}}
+                                                    {{> methodSignature }}
+                                                    {{/each}}
+                                                </div>
+                                                {{/if}}
+
+                                                {{#if client.fields}}
+                                                <h2>Fields</h2>
+                                                {{#client}}
+                                                {{> fields }}
+                                                {{/client}}
+                                                {{/if}}
+                                            </div>
+
+                                            {{#if client.remoteMethods }}
+                                            {{#each client.remoteMethods }}
+                                            {{> method }}
+                                            {{/each}}
+                                            {{/if}}
+
+                                            {{#if client.otherMethods }}
+                                            {{#each client.otherMethods }}
+                                            {{> method }}
+                                            {{/each}}
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> foot }}
+</body>
+
+{{> footer }}
